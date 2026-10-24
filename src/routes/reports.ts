@@ -37,7 +37,7 @@ reportsRouter.post("/stock-movement", async (req: Request, res: Response) => {
     const odbcToDate = formatDateToOdbc(effectiveTo);
 
     const compCodeParam = await resolveCompanyCodeParam(conn, companyCode);
-    const compNo = req.body?.compNo ?? 11;
+    const compNo = req.body?.compNo ?? 12;
     const locParam = locNo ? `('${locNo}')` : "('11')";
 
     const formattedParams = [
@@ -89,7 +89,7 @@ reportsRouter.post("/stock-and-sales", async (req: Request, res: Response) => {
     const odbcToDate = formatDateToOdbc(effectiveTo);
 
     const compCodeParam = await resolveCompanyCodeParam(conn, companyCode);
-    const compNo = req.body?.compNo ?? 11;
+    const compNo = req.body?.compNo ?? 12;
     const cleanLoc = locNo ? String(locNo).replace(/['"()]/g, "").trim() : "11";
     const locParam = `('${cleanLoc}')`;
 
@@ -167,7 +167,7 @@ reportsRouter.post("/customer-item-sale", async (req: Request, res: Response) =>
     conn = await dbPool.getConnection();
     await conn.query("SET sql_mode = ''");
 
-    const compNo = params.compNo ?? 11;
+    const compNo = params.compNo ?? 12;
     const locNoParam = params.locNo ? `('${params.locNo}')` : "('11')";
     const finYear = params.finYear || 202627;
 
@@ -253,7 +253,7 @@ reportsRouter.post("/party-item-sale", async (req: Request, res: Response) => {
     conn = await dbPool.getConnection();
     await conn.query("SET sql_mode = ''");
 
-    const compNo = params.compNo ?? 11;
+    const compNo = params.compNo ?? 12;
     const locNo = params.locNo ? `('${params.locNo}')` : "('11')";
     const finYear = params.finYear || 202627;
 
@@ -312,7 +312,7 @@ reportsRouter.post("/mr-overdue", async (req: Request, res: Response) => {
     conn = await dbPool.getConnection();
     await conn.query("SET sql_mode = ''");
 
-    const compNo = params.compNo ?? 11;
+    const compNo = params.compNo ?? 12;
     const locNo = Number(params.locNo) || 11;
     const finYear = params.finYear || 202627;
 
@@ -390,7 +390,7 @@ reportsRouter.post("/claim-data", async (req: Request, res: Response) => {
       const effectiveFrom = matchFrom ? matchFrom[0] : String(params.fromDate).trim();
       const matchTo = String(params.toDate).match(/\d{4}-\d{2}-\d{2}/);
       const effectiveTo = matchTo ? matchTo[0] : String(params.toDate).trim();
-      const compNo = params.compNo ?? 11;
+      const compNo = params.compNo ?? 12;
       const locNo = Number(params.locNo) || 11;
       const finYear = params.finYear ?? 202627;
       const compCodeParam = await resolveCompanyCodeParam(conn, params.compCode);
@@ -450,7 +450,7 @@ reportsRouter.post("/claim-data", async (req: Request, res: Response) => {
         const toDateStr = params.toDate || new Date().toISOString().slice(0, 10);
         const odbcFromDate = formatDateToOdbc(fromDateStr);
         const odbcToDate = formatDateToOdbc(toDateStr);
-        const compNo = params.compNo ?? 11;
+        const compNo = params.compNo ?? 12;
         const locNo = Number(params.locNo) || 11;
         const locNoParam = `('${locNo}')`;
         const finYear = params.finYear || 202627;
@@ -563,7 +563,7 @@ reportsRouter.post("/dev-procedure-sandbox", async (req: Request, res: Response)
 
     if (procedureName === "rptStockMovementStatement") {
       const formattedParams = [
-        params.compNo ?? 11,
+        params.compNo ?? 12,
         `'${locParam.replace(/'/g, "''")}'`,
         202627,
         formatDateToOdbc("2026-04-01"),
@@ -579,7 +579,7 @@ reportsRouter.post("/dev-procedure-sandbox", async (req: Request, res: Response)
       const formattedParams = [
         odbcFrom,
         odbcTo,
-        params.compNo ?? 11,
+        params.compNo ?? 12,
         `'${locParam.replace(/'/g, "''")}'`,
         202627,
         "''",
@@ -597,7 +597,7 @@ reportsRouter.post("/dev-procedure-sandbox", async (req: Request, res: Response)
       sql = `CALL \`pdyspvtrans\`.\`rptItemCustomerSale\`(${formattedParams})`;
     } else if (procedureName === "rptMRwisePeriodicalOutstanding") {
       const formattedParams = [
-        params.compNo ?? 11,
+        params.compNo ?? 12,
         Number(params.locNo) || 11,
         202627,
         formatDateToOdbc("2026-04-01"),
@@ -616,7 +616,7 @@ reportsRouter.post("/dev-procedure-sandbox", async (req: Request, res: Response)
       sql = `CALL \`rptMRwisePeriodicalOutstanding\`(${formattedParams})`;
     } else if (procedureName === "rptCompanyCustomerItemwiseSales") {
       const formattedParams = [
-        params.compNo ?? 11,
+        params.compNo ?? 12,
         `'${locParam.replace(/'/g, "''")}'`,
         202627,
         odbcFrom,
@@ -656,7 +656,7 @@ reportsRouter.post("/dev-procedure-sandbox", async (req: Request, res: Response)
       const finYear = params.finYear ?? 202627;
 
       const formattedParams = [
-        params.compNo ?? 11,
+        params.compNo ?? 12,
         `'${locParam.replace(/'/g, "''")}'`,
         odbcFrom,
         odbcTo,
