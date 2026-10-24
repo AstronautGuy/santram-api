@@ -81,7 +81,7 @@ function normalizeLegacyMR(raw: any) {
     id: String(raw.ID),
     name,
     email,
-    locNo: "12",
+    locNo: "11",
     division,
     company,
     companyCode,

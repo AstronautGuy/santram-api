@@ -98,7 +98,7 @@ authRouter.post("/mr-lookup", async (req: Request, res: Response) => {
         companyCode: allCodes.join(",") || (mr.CompanyCode ? String(mr.CompanyCode).trim() : null),
         isBlocked: mrList.every((item) => Number(item.IsInActive || 0) === 1),
         rank: maxRank,
-        locNo: "12",
+        locNo: "11",
         assignments,
         allIds: Array.from(new Set(mrList.map((item) => String(item.ID)))),
       },
